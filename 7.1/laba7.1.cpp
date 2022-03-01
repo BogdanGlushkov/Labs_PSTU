@@ -19,10 +19,10 @@ int main()
 	float a1, a2, res1, res2;
 	float p1, p2, q1, q2;
 	//
-	cout << "Type the tens numbers, that u would like to plus ^_^: ";
+	cout << "Type decimals fractions for addition ^_^: ";
 	cin >> a1 >> a2;
 
-	cout << "Type the default slash numbers to sum it: ";
+	cout << "Type usual fractions for addition: ";
 	cin >> p1;
 	cout << "/";
 	cin >> q1;
