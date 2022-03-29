@@ -3,62 +3,88 @@
 
 #include <iostream>
 
-char lang[] =
-{ '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
-	'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-		'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-			'A', 'B', 'C', 'D', 'E', 'F', 'G',
-				'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-					 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '$'
+using namespace std;
+
+struct Node
+{
+	char data;
+	Node* ptr_prev = nullptr;
+	Node* ptr_next = nullptr;
 };
 
-struct Element {
-	char value;
-	Element* pNext;
-}*head;
-
-void AddItem()
+struct List
 {
-	Element* pElem = new Element;
-	pElem->value = lang[rand()% 43];
-	pElem->pNext = head;
-	head = pElem;
+	Node* headNode = nullptr;
+	Node* tailNode = nullptr;
+};
+
+void AddList(List& list, char& data)
+{
+	Node* newnode = new Node;
+	newnode->data = data;
+	if (list.headNode == nullptr)
+	{
+		list.headNode = newnode;
+		list.tailNode = newnode;
+		return;
+	}
+	Node* currentnode = list.headNode;
+	newnode->ptr_prev = currentnode;
+	if (currentnode->ptr_next != nullptr)
+	{
+		newnode->ptr_next = currentnode->ptr_next;
+		currentnode->ptr_next->ptr_prev = newnode;
+	}
+	currentnode->ptr_next = newnode;
+	list.tailNode = newnode;
 }
 
-void ChangeItems()
+void printList(List& list)
 {
-	Element* elem = head;
-	Element* prev = NULL;
-
-	while (elem)
+	Node* currentnode = list.headNode;
+	while (currentnode != nullptr)
 	{
-		if (elem->value % 2 == 1)
-		{
-			
-		}
+		cout << currentnode->data << " ";
+		currentnode = currentnode->ptr_next;
 	}
 }
 
-void PrintList()
+void addList(List& list)
 {
-	Element* elem = head;
-	while (elem)
+	Node* newnode = new Node;
+	char data;
+	int count = 1;
+	Node* currentnode = list.headNode;
+	while (currentnode != nullptr)
 	{
-		printf("%d\n", elem->value);
-		elem = elem->pNext;
+		if (count % 2 != 0)
+		{
+			cin >> data;
+			newnode->data = data;
+			currentnode->data = newnode->data;
+		}
+		currentnode = currentnode->ptr_next;
+		count++;
 	}
 }
 
 int main()
 {
-	
-	for (int i = 1; i < 10; i++)
-		AddItem();
-
-	PrintList();
-
-	ChangeItems();
-	PrintList();
-
+	List list;
+	int n;
+	char tmp;
+	cout << "Type size of the list: ";
+	cin >> n;
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> tmp;
+		AddList(list, tmp);
+	}
+	cout << "Original list: " << endl;
+	printList(list);
+	cout << endl;
+	addList(list);
+	cout << "Final list" << endl;
+	printList(list);
 	return 0;
 }
