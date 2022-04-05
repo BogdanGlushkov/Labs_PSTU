@@ -163,7 +163,7 @@ void show_info(const Person temp)
     cout << "Элемент " << h++ << endl;
     cout << "\nФИО         " << temp.full_name
         << "\n#Адрес      " << temp.adress
-        << "\n#Паспорта   " << temp.phoneNumber << endl << endl;
+        << "\n#Номер   " << temp.phoneNumber << endl << endl;
 }
 
 
