@@ -1,7 +1,7 @@
 ﻿//Тип информационного поля int.
 //Удалить из списка все элементы с четными информационными полями.
 
-#include "iostream"
+#include <iostream>
 
 struct Element {
 	int value;
