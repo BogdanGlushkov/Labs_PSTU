@@ -62,7 +62,6 @@ public:
 	}
 
 
-
 	Triad& operator=(const Triad& p)
 	{
 		if (&p == this) return *this;
